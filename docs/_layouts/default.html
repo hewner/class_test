@@ -21,9 +21,9 @@
 {% capture forLoopMaxInt %}{{ splitted_url_parts.size | minus:2 }}{% endcapture %}
 {% for i in (1..forLoopMaxInt) %}
   {% capture next_prepender %}{{next_prepender}}/{{ splitted_url_parts[i] }}{% endcapture %}
-    / <a href="{{ site.github.repository_url }}/{{next_prepender}}"> splitted_url_parts[i] </a>
+    / <a href="{{ site.github.repository_url }}/{{next_prepender}}"> {{splitted_url_parts[i]}} </a>
 {% endfor %}
-/ {{ page.path }}
+/ {{ page.basename }}
 </h1>
       
 
