@@ -10,19 +10,21 @@
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
-      <h1>Buffalo is qqq</h1>
 
 <!-- Breakcrumbs based on https://github.com/comsysto/jekyll-breadcrumb-for-github-pages -->
-      
-<ol class="breadcrumb">
+
+<h1>
+
+<a href="{{ site.github.repository_url }}">{{site.github.repository_name}}</a>
 
 {% assign splitted_url_parts = page.url | split: '/' %}
 {% capture forLoopMaxInt %}{{ splitted_url_parts.size | minus:2 }}{% endcapture %}
 {% for i in (1..forLoopMaxInt) %}
   {% capture next_prepender %}{{next_prepender}}/{{ splitted_url_parts[i] }}{% endcapture %}
-    <li>  {{ next_prepender }} </li>
+    / <a href="{{ site.github.repository_url }}/{{next_prepender}}"> splitted_url_parts[i] </a>
 {% endfor %}
-</ol>
+/ {{ page.path }}
+</h1>
       
 
       {{ content }}
