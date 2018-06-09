@@ -11,6 +11,12 @@ private.zip
 Private
 endef
 
+define INDEX_HEADER
+
+
+endef
+
+
 define MD_HEADER
 ---
 title:  "$(basename $(notdir $<))"
@@ -67,8 +73,9 @@ docs/%.md : %.md
 	cat /tmp/myheader /tmp/mytoc $< > docs/$<
 
 docs/index.md : $(MD_OUT_FILES)
+	$(file > docs/index.md,$(MD_HEADER))
 	find . -name "*.md" \( -not -path "./docs/*" \) -printf '%P\n' > /tmp/myindex
-	awk -F/ '{print NF " " substr($$0, 1, length($$0)-3)}' /tmp/myindex | sort -n | awk '{print "*[" $$2 "]" "(" $$2 ")"}' > docs/index.md
+	awk -F/ '{print NF " " substr($$0, 1, length($$0)-3)}' /tmp/myindex | sort -n | awk '{print "*[" $$2 "]" "(" $$2 ")"}' >> docs/index.md
 # sed -i -e "s|\(.*\)\.md|*[\1](\1)|" docs/index.md
 
 # we don't want to check the makefile in as Makefile because it might
