@@ -18,7 +18,7 @@
 
 {% assign splitted_url_parts = page.url | split: '/' %}
 {% for part in splitted_url_parts %}
-    <li>  {{ splitted_url_parts[i] }} </li>
+    <li>  {{ part }} </li>
 {% endfor %}
 </ol>
       
