@@ -17,8 +17,10 @@
 <ol class="breadcrumb">
 
 {% assign splitted_url_parts = page.url | split: '/' %}
-{% for part in splitted_url_parts %}
-    <li>  {{ part }} </li>
+{% capture forLoopMaxInt %}{{ splitted_url_parts.size | minus:1 }}{% endcapture %}
+{% for i in (0..forLoopMaxInt) %}
+  {% capture next_prepender %}{{next_prepender}}/{{ splitted_url_parts[i] }}{% endcapture %}
+    <li>  {{ next_prepender }} </li>
 {% endfor %}
 </ol>
       
