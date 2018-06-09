@@ -10,10 +10,12 @@
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
-      <h1>Buffalo is great</h1>
+      <h1>Buffalo is nice</h1>
 
+<!-- Breakcrumbs based on https://github.com/comsysto/jekyll-breadcrumb-for-github-pages -->
+      
 <ol class="breadcrumb">
-<li><a href="{{ site.baseurl }}/">Home</a></li>
+<li><a href="{{ site.github.repository_url }}/">Home</a></li>
 {% capture page_url_without_index_html %}{{ page.url | remove: "/index.html" }}{% endcapture %}
 {% assign splitted_url_parts = page_url_without_index_html | split: '/' %}
 {% capture forLoopMaxInt %}{{ splitted_url_parts.size | minus:1 }}{% endcapture %}
@@ -26,7 +28,7 @@
         {% assign j = forLoopMaxInt | plus: 0 %}
             <li {% if i == j %}class="active"{% endif %}>
                 {% capture breadcrumb_page_page_url_without_index_html %}{{ breadcrumb_page.url | remove: "index.html" }}{% endcapture %}
-                <a href="{{ site.baseurl }}{{breadcrumb_page_page_url_without_index_html}}">{{breadcrumb_page.breadcrumb}}</a>
+                <a href="{{ site.github.repository_url }}{{breadcrumb_page_page_url_without_index_html}}">{{breadcrumb_page.breadcrumb}}</a>
             </li>
         {% endif %}
     {% endfor %}
