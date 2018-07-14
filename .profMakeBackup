@@ -1,8 +1,8 @@
 SHELL = /bin/bash
-MD_FILES = $(shell find . -name "*.md" \( -not -path "./docs/*" \) -printf '%P\n')
+OUTPUT_FILES = $(shell git ls-files -c | sed -e "/^docs/d" -e "/^private.zip.gpg/d" -e "/^.profMakeBackup/d")
 PRIVATE_FILES = $(shell find Private)
-MD_OUTPUT_DIR = docs/_mypages
-MD_OUT_FILES = $(addprefix $(MD_OUTPUT_DIR)/, $(MD_FILES))
+OUTPUT_DIR = docs/_mypages
+OUTPUT_FILES_DEST = $(addprefix $(OUTPUT_DIR)/, $(OUTPUT_FILES))
 
 
 # we want the freedom to have a traditional git ignore
@@ -61,12 +61,25 @@ private.zip : $(PRIVATE_FILES)
 # copy over any md files into a corresponding directory there on the
 # way, we add a TOC and a jekyll header
 
-output_mds: $(MD_OUT_FILES)
+output_mds: $(OUTPUT_FILES_DEST)
 
-$(MD_OUTPUT_DIR)/%.md : %.md
-	mkdir -p $(MD_OUTPUT_DIR)/$(dir $<)
+# for mds we add a little header
+$(OUTPUT_DIR)/%.md : %.md
+	@mkdir -p $(OUTPUT_DIR)/$(dir $<)
 	$(file > /tmp/myheader,$(MD_HEADER))
-	cat /tmp/myheader $< > $(MD_OUTPUT_DIR)/$<
+	cat /tmp/myheader $< > $(OUTPUT_DIR)/$<
+
+
+
+# for other files we just copy directly
+$(OUTPUT_DIR)/% : %
+	@mkdir -p $(OUTPUT_DIR)/$(dir $<)
+	cp $< $@
+
+# If the source doesn't exist (probabaly uncommited delete) do nothing
+$(OUTPUT_DIR)/% :
+	@echo "Skipping copying $* to output (deleted?)"
+
 
 # we don't want to check the makefile in as Makefile because it might
 # be confused for a real Makefile.  But it really should be checked
