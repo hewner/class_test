@@ -1,9 +1,6 @@
 ---
 title:  "hello"
 ---
-### Contents
-- [Heading](#heading)
-- [Other heading](#other-heading)
 # Heading
 
 text
@@ -11,3 +8,9 @@ text
 # Other heading
 
 more text
+
+## Subheading
+
+### subsubheading
+
+## Another subheading
