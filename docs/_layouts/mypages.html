@@ -21,16 +21,17 @@
 
 <!-- Breakcrumbs based on https://github.com/comsysto/jekyll-breadcrumb-for-github-pages -->
 
+{% assign splitted_url_parts = page.sourcepath | split: '/' %}
 <h1>
 <a href="{{ site.github.repository_url }}">{{site.github.repository_name}}</a>
 
-{% assign splitted_url_parts = page.url | split: '/' %}
-{% capture forLoopMaxInt %}{{ splitted_url_parts.size | minus:2 }}{% endcapture %}
-{% for i in (1..forLoopMaxInt) %}
+
+{% capture forLoopMaxInt %}{{ splitted_url_parts.size | minus:1 }}{% endcapture %}
+{% for i in (0..forLoopMaxInt) %}
   {% capture next_prepender %}{{next_prepender}}/{{ splitted_url_parts[i] }}{% endcapture %}
     / <a href="{{ site.github.repository_url }}/tree/master{{next_prepender}}"> {{splitted_url_parts[i]}} </a>
 {% endfor %}
-/ {{ page.title }}
+
 </h1>
       
 <div id="main_content">
