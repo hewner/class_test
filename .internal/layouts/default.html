@@ -7,9 +7,9 @@
 
 {% seo %}
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-    <link rel="stylesheet" href="{{ "/assets/css/toc.css" | relative_url }}">
-    <script src="{{ "/assets/js/jquery-3.3.1.slim.min.js" | relative_url }}"></script>
-    <script src="{{ "/assets/js/jquery.toc.js" | relative_url }}"></script>
+    <link rel="stylesheet" href="{{ "/.internal/assets/css/toc.css" | relative_url }}">
+    <script src="{{ "/.internal/assets/js/jquery-3.3.1.slim.min.js" | relative_url }}"></script>
+    <script src="{{ "/.internal/assets/js/jquery.toc.js" | relative_url }}"></script>
     <script>
       $(function(){
           $('#main_content').toc();
@@ -21,7 +21,7 @@
 
 <!-- Breakcrumbs based on https://github.com/comsysto/jekyll-breadcrumb-for-github-pages -->
 
-{% assign splitted_url_parts = page.sourcepath | split: '/' %}
+{% assign splitted_url_parts = page.path | split: '/' %}
 <h1>
 <a href="{{ site.github.repository_url }}">{{site.github.repository_name}}</a>
 
